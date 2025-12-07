@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DRS Training Portal — Help & Overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+/* FLOATING BACK BUTTON */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 18px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(4px);
+    transition: 0.3s;
+    box-shadow: 0 0 0px rgba(0,102,204,0.6);
+    z-index: 99999;
+}
+.back-btn:hover {
+    background: #003366 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 18px rgba(0,102,204,0.9);
+}
+
+/* HERO */
+.hero {
+    background:url('assets/surf.jpg') center/cover no-repeat;
+    height:300px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+    position: relative;   /* Needed for shimmer anchoring */
+}
+.hero-glass {
+    background:rgba(255,255,255,0.2);
+    padding:20px 40px;
+    border-radius:12px;
+    backdrop-filter:blur(6px);
+}
+
+/* SHIMMER LINE FIXED AT HERO BOTTOM */
+.header-divider {
+    height: 4px;
+    position: relative;
+    overflow: hidden;
+    background: #c9a042;
+    width: 100%;
+}
+.hero-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* SHIMMER ANIMATION */
+.header-divider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -200px;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.9),
+        transparent
+    );
+    animation: runline 2.8s linear infinite;
+}
+@keyframes runline {
+    0%   { left: -200px; }
+    100% { left: 100%; }
+}
+
+/* GLASSMORPHISM CARDS */
+.section {
+    max-width:900px;
+    margin:40px auto;
+    padding:30px;
+    border-radius:12px;
+    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.20);
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow:0 8px 24px rgba(0,0,0,0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.section:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+h2 { color:#003366; }
+
+/* FOOTER */
+.footer {
+    padding: 35px 20px;
+    background: #003366;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    margin-top:40px;
+}
+
+/* SCROLL TO TOP BUTTON */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: #003366;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0,0,0,0.35);
+    transition: 0.3s;
+    z-index: 999999;
+    opacity: 0;
+    pointer-events: none;
+}
+.scroll-top-btn.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.scroll-top-btn:hover {
+    background: #0055aa;
+    box-shadow: 0 0 18px rgba(0,102,204,0.9);
+}
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<!-- HERO WITH CORRECT SHIMMER POSITION -->
+<div class="hero">
+    <div class="hero-glass">
+        <h1>DRS Training Portal — Help & Overview</h1>
+        <p>Your guide to understanding the training system</p>
+    </div>
+
+    <div class="header-divider hero-divider"></div>
+</div>
+
+<div class="section">
+<h2>1. What is the DRS Training Portal?</h2>
+<p>The DRS Training Portal is a secure, structured learning environment designed for maritime professionals. It centralizes training materials, checklists, forms, job descriptions, and digital assessments into one modern system.</p>
+</div>
+
+<div class="section">
+<h2>2. Why This Portal Exists</h2>
+<p>The maritime industry demands precision, consistency, and strong safety habits. The portal ensures standardized training, instant access to materials, structured learning, and global availability.</p>
+</div>
+
+<div class="section">
+<h2>3. Two-Side Structure of the Portal</h2>
+<p>Both sections are password-protected and accessible only to authorized personnel.</p>
+
+<h3>A. Company Information Section</h3>
+<ul>
+<li>Company information</li>
+<li>Course list</li>
+<li>Photo galleries</li>
+<li>Checklists and mandatory forms</li>
+<li>Familiarisation procedures</li>
+<li>Job descriptions</li>
+<li>FAQ</li>
+</ul>
+
+<h3>B. Secure Training Section</h3>
+<ul>
+<li>Rank-specific training rooms</li>
+<li>Assessment quizzes</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>4. How the Portal Works</h2>
+<ol>
+<li><strong>Registration:</strong> Authorized users are verified before access.</li>
+<li><strong>Login:</strong> Users access the secure section via password.</li>
+<li><strong>Training Access:</strong> Each rank sees only relevant content.</li>
+<li><strong>Assessment:</strong> Modules include quizzes for instant evaluation.</li>
+</ol>
+</div>
+
+<div class="section">
+<h2>5. Key Features</h2>
+<ul>
+<li>High-security authentication</li>
+<li>Rank-based learning structure</li>
+<li>Centralized checklists & documents</li>
+<li>Familiarisation procedures</li>
+<li>Digital assessment system</li>
+<li>Global accessibility</li>
+<li>Supports safety, quality, and compliance</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>6. Who Benefits?</h2>
+<h3>Seafarers</h3>
+<ul>
+<li>Faster familiarisation</li>
+<li>Clearer job duties</li>
+<li>Reduced errors</li>
+<li>Better career readiness</li>
+</ul>
+
+<h3>Company & Shore Teams</h3>
+<ul>
+<li>Standardized training</li>
+<li>Audit-friendly digital records</li>
+<li>Reduced administrative workload</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>7. Final Summary</h2>
+<p>The DRS Training Portal transforms training into a modern, secure, and accessible digital experience, empowering every seafarer with the knowledge necessary to work confidently and safely at sea.</p>
+</div>
+
+<div class="footer">
+    © Oasis Maritime Education — Demo Portal. All Rights Reserved. Contact Us at: oasismaritimeedu@gmail.com
+</div>
+<div class="scroll-top-btn" id="scrollTopBtn">↑</div>
+
+<script>
+window.addEventListener('scroll', function() {
+    const btn = document.getElementById('scrollTopBtn');
+    if (window.scrollY > 300) btn.classList.add('show');
+    else btn.classList.remove('show');
+});
+document.getElementById('scrollTopBtn').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>

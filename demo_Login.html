@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Login — DRS Training Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e8f0;
+        }
+    </style>
+
+<!-- NAVBAR CSS START -->
+<style>
+/* Navbar placed fixed so we do not alter the login page structure */
+#nav-master {
+  position: fixed;
+  top: 30px;
+  left: 577px;
+  width: 985px;
+  height: auto;
+  z-index: 99999999;
+  pointer-events: none; /* container ignores clicks, inner items accept them */
+  font-family: Inter, Arial, sans-serif;
+}
+
+/* nav area accepts pointer events */
+#nav-master .nav-area{
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  width:100%;
+  height:56px;
+  pointer-events: auto;
+}
+
+/* link styles */
+#nav-master .nav-area a{
+  color: #0822eb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display:inline-block;
+}
+
+/* logout hover */
+#nav-master .nav-area a.logout:hover{
+  background: #003366;
+  color: #ffffff;
+  border-radius:4px;
+}
+
+/* dropdown container */
+#nav-master .dropdown{ position: relative; display:inline-block; }
+
+/* dropdown content will be moved to body by JS for reliability */
+.dropdown-content{
+  display:none;
+  position:absolute !important;
+  min-width:180px;
+  background:#ffffff;
+  border-radius:6px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.18);
+  z-index:1500000 !important;
+  pointer-events:auto !important;
+}
+
+/* submenu links */
+.dropdown-content a{
+  display:block;
+  padding:10px 16px;
+  color:#000;
+  text-decoration:none;
+}
+.dropdown-content a:hover{ background:#003366; color:#fff; }
+</style>
+<!-- NAVBAR CSS END -->
+
+</head>
+
+<body class="flex items-center justify-center min-h-screen">
+
+<!-- NAVBAR START -->
+<div id="nav-master">
+  <div class="nav-area">
+    <a href="#">Login</a>
+        <a href="demo_index.html">Home</a>
+        
+        <div class="dropdown">
+            <a href="#">About ▼</a>
+            <div class="dropdown-content">
+                <a href="demo_about.html">About</a>
+                <a href="demo_gallery.html">Gallery</a>
+            </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#">Courses ▾</a>
+      <div class="dropdown-content">
+        <a href="demo_course_d.html">Courses List</a>
+        <a href="demo_course_r.html">Course Register</a>
+      </div>
+    </div>
+
+    <a href="demo_JD_cheng.html">Job Responsibilities</a>
+    <a href="demo_faq.html">FAQ</a>
+    <a href="index.html" class="logout">Logout</a>
+  </div>
+</div>
+<!-- NAVBAR END -->
+
+
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md mx-4 mt-40">
+        
+        <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">
+            DRS Training Portal
+        </h1>
+
+        <!-- Tab navigation -->
+        <div class="flex border-b border-gray-200 mb-6">
+            <button id="login-tab" 
+                class="flex-1 py-3 text-center text-lg font-medium border-b-2 border-blue-600 text-blue-600">
+                Login
+            </button>
+
+            <button id="register-tab" 
+                class="flex-1 py-3 text-center text-lg font-medium border-b-2 border-transparent text-gray-600 hover:text-blue-600">
+                Register
+            </button>
+        </div>
+
+        <!-- Demo Form UI Only -->
+        <form id="demo-form" class="space-y-6">
+
+            <!-- FULL NAME (Register only) -->
+            <div id="full-name-field" class="hidden">
+                <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" class="mt-1 block w-full px-4 py-3 border rounded-lg shadow-sm">
+            </div>
+
+            <!-- RANK (Register only) -->
+            <div id="rank-field" class="hidden">
+                <label class="block text-sm font-medium text-gray-700">Rank</label>
+                <input type="text" class="mt-1 block w-full px-4 py-3 border rounded-lg shadow-sm">
+            </div>
+
+            <!-- EMAIL -->
+            <div id="email-field">
+                <label class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" class="mt-1 block w-full px-4 py-3 border rounded-lg shadow-sm">
+            </div>
+
+            <!-- PASSWORD (Login only) -->
+            <div id="password-field">
+                <label class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" class="mt-1 block w-full px-4 py-3 border rounded-lg shadow-sm">
+            </div>
+
+            <!-- Submit Button (Demo Only) -->
+            <button type="button" 
+                class="w-full py-3 px-4 rounded-lg text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 transition">
+                Continue (Demo Only)
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- PURE UI TAB SWITCHING -->
+    <script>
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+
+        const fullNameField = document.getElementById('full-name-field');
+        const rankField = document.getElementById('rank-field');
+        const passwordField = document.getElementById('password-field');
+
+        function switchToLogin() {
+            loginTab.classList.add('border-blue-600', 'text-blue-600');
+            registerTab.classList.remove('border-blue-600', 'text-blue-600');
+            registerTab.classList.add('text-gray-600');
+
+            fullNameField.classList.add('hidden');
+            rankField.classList.add('hidden');
+            passwordField.classList.remove('hidden');
+        }
+
+        function switchToRegister() {
+            registerTab.classList.add('border-blue-600', 'text-blue-600');
+            loginTab.classList.remove('border-blue-600', 'text-blue-600');
+            loginTab.classList.add('text-gray-600');
+
+            fullNameField.classList.remove('hidden');
+            rankField.classList.remove('hidden');
+            passwordField.classList.add('hidden');
+        }
+
+        loginTab.addEventListener('click', switchToLogin);
+        registerTab.addEventListener('click', switchToRegister);
+    </script>
+
+
+<!-- NAVBAR JS START -->
+<script>
+(function () {
+  const dropdowns = document.querySelectorAll('#nav-master .dropdown');
+  dropdowns.forEach(drop => {
+    const trigger = drop.querySelector('a');
+    const menu = drop.querySelector('.dropdown-content');
+    if (!trigger || !menu) return;
+
+    menu.style.position = 'absolute';
+    menu.style.display = 'none';
+    menu.style.zIndex = '1500000';
+    menu.style.pointerEvents = 'auto';
+
+    function showMenu() {
+      document.body.appendChild(menu);
+      const r = trigger.getBoundingClientRect();
+      const left = r.left + window.scrollX;
+      const top  = r.bottom + window.scrollY + 15; // adjust visually if needed
+      menu.style.left = left + 'px';
+      menu.style.top  = top  + 'px';
+      menu.style.display = 'block';
+    }
+    function hideMenu() { menu.style.display = 'none'; }
+
+    trigger.addEventListener('mouseenter', showMenu);
+    trigger.addEventListener('mouseleave', () => {
+      setTimeout(()=> { if (!menu.matches(':hover')) hideMenu(); }, 80);
+    });
+    menu.addEventListener('mouseenter', ()=> menu.style.display='block');
+    menu.addEventListener('mouseleave', hideMenu);
+
+    trigger.addEventListener('click', function(ev){ ev.preventDefault(); if(menu.style.display==='block') hideMenu(); else showMenu(); });
+
+    document.addEventListener('click', function(ev){
+      if (!ev.target.closest('.dropdown') && !ev.target.closest('.dropdown-content')) {
+        hideMenu();
+      }
+    });
+  });
+})();
+</script>
+<!-- NAVBAR JS END -->
+
+</body>
+</html>

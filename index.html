@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oasis Maritime Education — Demo Portal</title>
+
+<style>
+
+/* ===== GLOBAL COLORS ===== */
+:root {
+    --blue: #0a2342;
+    --blue-light: #e8f1fa;
+    --gold: #c9a042;
+    --white: #ffffff;
+    --text-dark: #0a2342;
+}
+
+body {
+    margin: 0;
+    background: #ffffff;
+    font-family: "Poppins", sans-serif;
+    color: var(--text-dark);
+    overflow-x: hidden;
+    padding-top: 140px; /* Accommodates tall navbar with logo + ticker */
+}
+
+/* ===================================================================== */
+/* =========================  NAVBAR (FINAL VERSION)  =================== */
+/* ===================================================================== */
+
+.navbar {
+    width: 100%;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 125px; /* Ensures clean layout */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* LEFT COLUMN — LOGO */
+.nav-left {
+    flex: 0 0 auto;
+}
+.nav-left img {
+    height: 85px;
+}
+
+/* RIGHT COLUMN — NAV LINKS (UNCHANGED) */
+.nav-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Prevents wrapping */
+}
+
+/* CENTER COLUMN — TICKER */
+.nav-center {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* TICKER BAR — frosted glass, maritime blue text */
+.center-ticker {
+    width: 100%;        /* expands fully */
+    max-width: none;    /* removes all limits */
+    height: 40px;
+    line-height: 40px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 18px rgba(224, 182, 84, 0.65);
+    border-radius: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 18px;    /* or 20px if preferred */
+    font-weight: 200;
+    color: #0a2342;
+    position: relative;
+
+}
+
+
+/* scrolling text left → right */
+.center-ticker span {
+    position: absolute;
+    right: 100%;
+    animation: tickerScroll 28s linear infinite;
+    padding-left: 20px;
+}
+
+@keyframes tickerScroll {
+    0%   { right: 100%; }
+    100% { right: -100%; }
+}
+
+@keyframes pulseGlow {
+    0%   { box-shadow: 0 0 14px rgba(201,160,66,0.25); }
+    50%  { box-shadow: 0 0 26px rgba(201,160,66,0.45); }
+    100% { box-shadow: 0 0 14px rgba(201,160,66,0.25); }
+}
+
+.center-ticker {
+    animation: pulseGlow 8s infinite ease-in-out;
+}
+
+
+/* fade edges */
+.center-ticker::before,
+.center-ticker::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 45px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.center-ticker::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0.7), rgba(255,255,255,0));
+}
+
+.center-ticker::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,0.7), rgba(255,255,255,0));
+}
+
+/* ===================================================================== */
+/* =====================  ORIGINAL NAV-LINKS STYLES  ==================== */
+/* ===================================================================== */
+
+.nav-links a {
+    margin: 0 16px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--blue);
+    padding: 8px 4px;
+    letter-spacing: 0.2px;
+    position: relative;
+    transition: color 0.3s, transform 0.25s;
+}
+
+/* gold underline animation */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links {
+    display: flex;          /* <-- THIS is the missing key */
+    align-items: center;    /* keeps them aligned with each other */
+    margin-right: 40px;
+}
+
+/* ===================================================================== */
+/* =========================  HERO SECTION  ============================ */
+/* ===================================================================== */
+
+.hero {
+    padding: 180px 40px 120px;
+    text-align: center;
+    background:
+        linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0.1)),
+        url('assets/surf.jpg') center/cover no-repeat;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 10px;
+    transform: translateY(-14px);
+}
+
+.hero-underline {
+    width: 120px;
+    height: 4px;
+    margin: 12px auto 18px;
+    background: linear-gradient(to right, var(--gold), var(--blue));
+    border-radius: 40px;
+}
+
+/* glass hero card */
+.hero-glass {
+    margin: 20px auto 25px;
+    padding: 20px 28px;
+    max-width: 750px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.hero-glass:hover {
+    transform: translateY(-6px);
+    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(201, 160, 66, 0.55);
+}
+
+.cta-btn {
+    margin-top: 25px;
+    padding: 14px 28px;
+    background: var(--gold);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 40px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* ===================================================================== */
+/* ========================= FEATURES SECTION =========================== */
+/* ===================================================================== */
+
+.features {
+    padding: 70px 40px 40px;
+    background: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+}
+
+.feature-box {
+    background: var(--blue-light);
+    padding: 40px;
+    border-radius: 18px;
+    border-left: 6px solid var(--gold);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+text-align: center;   /* <-- Add this line */
+}
+
+/* ===================================================================== */
+/* ============================== FOOTER ================================ */
+/* ===================================================================== */
+
+.footer-divider {
+    width: 100%;
+    height: 4px;
+    background: var(--gold);
+    margin-top: 40px;
+}
+
+.footer {
+    padding: 35px 20px;
+    background: var(--blue);
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* ===================================================================== */
+/* ======================== CONTACT MODAL (UNCHANGED) ================== */
+/* ===================================================================== */
+
+.contact-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+}
+
+/* Modal Box */
+.contact-box {
+    width: 380px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    animation: dropFade 0.25s ease-out;
+}
+
+/* Modal header */
+.contact-modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Contact form fields */
+.contact-box input,
+.contact-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 14px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Buttons in modal */
+.contact-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+}
+
+.btn-secondary {
+    background: #ddd;
+    color: #000;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =================================================================== -->
+<!-- =========================== NAVBAR (3-COLUMN) ====================== -->
+<!-- =================================================================== -->
+
+<div class="navbar">
+
+    <!-- LEFT COLUMN -->
+    <div class="nav-left">
+        <img src="assets/Logo_OME.png" alt="Oasis Maritime Education Logo">
+    </div>
+
+    <!-- CENTER COLUMN: FROSTED GLASS TICKER -->
+    <div class="nav-center">
+        <div class="center-ticker">
+            <span>
+            ⚓ Safety Begins With Preparedness — Train Today, Sail Confidently Tomorrow • Every Safe Voyage Starts With a Well-Trained Crew • Maritime Excellence is Built on a Foundation of Safety • Stay Ready, Stay Sharp — Safety Never Sleeps ⚓
+    
+            </span>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+<div class="nav-right">
+    <div class="nav-links">
+
+        <a href="demo_help.html">Project</a>
+
+        <a href="#" id="openContact">Contact Us</a>
+
+    </div>
+    </div>
+
+</div>
+
+
+<!-- =================================================================== -->
+<!-- ================================ HERO ============================== -->
+<!-- =================================================================== -->
+
+<section class="hero">
+    <h1>Welcome to Oasis Maritime Education</h1>
+    <div class="hero-underline"></div>
+
+    <div class="hero-glass">
+        <p>Your gateway to modern, innovative and immersive maritime training.<br>
+        Explore our Demo Portal and experience the future of seafarer Safety Training.</p>
+    </div>
+
+    <a href="demo_index.html" class="cta-btn">Enter Demo Portal</a>
+</section>
+
+<!-- =================================================================== -->
+<!-- ============================== FEATURES ============================ -->
+<!-- =================================================================== -->
+
+<section class="features">
+
+    <div class="feature-box">
+        <div class="feature-title">⚓ <strong>Well-Curated Training Material</strong></div>
+        <div>Training material built to maritime standards, with clear explanations and real shipboard examples to strengthen practical skills.</div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-title">📘 <strong>Online Training</strong></div>
+        <div>Online training that works anytime, anywhere Globally!! - Access it 24/7.</div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-title">🔒 <strong>Rank-Wise E-Training Classrooms</strong></div>
+        <div>Online classrooms designed for each rank so every seafarer trains at the right level with the right material.</div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-title">🌊 <strong>Safety at Sea</strong></div>
+        <div>Safety begins with a well-trained, confident crew. Our training strengthens safety awareness, emergency readiness, and good judgment, helping every seafarer protect life, ship, and the environment.</div>
+    </div>
+
+    <!-- ⭐ NEW FIFTH CARD ⭐ -->
+    <div class="feature-box">
+        <div class="feature-title">🧭 <strong>Mental Health and Well-Being at Sea</strong></div>
+        <div>Dedicated training focused on stress, fatigue, emotional resilience, and the unique psychological challenges of shipboard life.</div>
+    </div>
+
+</section>
+
+<div class="footer-divider"></div>
+
+<div class="footer">
+    © Oasis Maritime Education — Demo Portal. All Rights Reserved. Contact Us at: oasismaritimeedu@gmail.com
+</div>
+
+<!-- =================================================================== -->
+<!-- =========================== CONTACT MODAL ========================== -->
+<!-- =================================================================== -->
+
+<div id="contactModal" class="contact-modal">
+    <div class="contact-box">
+
+        <div class="contact-modal-header">
+            <h2>Contact Us <br>"Oasis Maritime Education"</h2>
+        </div>
+
+        <form id="contactForm" novalidate>
+
+            <label>Name</label>
+            <input id="contactName" type="text" placeholder="Enter your full name" required>
+
+            <label>Rank</label>
+            <input id="contactRank" type="text" placeholder="Your rank onboard" required>
+
+            <label>Email</label>
+            <input id="contactEmail" type="email" placeholder="Email ID" required>
+
+            <label>Phone Number</label>
+            <input id="contactPhone" type="text" placeholder="Phone Number" required>
+
+            <label>Message</label>
+            <textarea id="contactMessage" rows="3" placeholder="Type your message here..." required></textarea>
+
+            <div class="contact-actions">
+                <button type="button" id="closeContact" class="btn-secondary">Close</button>
+                <button type="submit" id="submitContact" class="btn-primary">Submit</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- ============================== SCRIPTS ============================= -->
+<!-- =================================================================== -->
+
+<script>
+// open contact modal
+document.getElementById('openContact').onclick = function(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').reset();
+    document.getElementById('contactModal').style.display = 'flex';
+};
+</script>
+
+
+
+<script>
+// contact form validation + mailto
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+
+    if (!this.checkValidity()) {
+        e.preventDefault();
+        this.reportValidity();
+        return;
+    }
+
+    const email = document.getElementById("contactEmail").value.trim();
+    if (!email.includes("@")) {
+        e.preventDefault();
+        alert("Please enter a valid email address containing '@'.");
+        return;
+    }
+
+    const message = document.getElementById("contactMessage").value.trim();
+    if (message.length < 20) {
+        e.preventDefault();
+        alert("Message must be at least 20 characters long.");
+        return;
+    }
+
+    const name = document.getElementById("contactName").value.trim();
+    const rank = document.getElementById("contactRank").value.trim();
+    const phone = document.getElementById("contactPhone").value.trim();
+
+    const to = "oasismaritimeedu@gmail.com";
+    const subject = `New Contact Form Submission from ${name}`;
+    const body =
+        "Name: " + name + "\n" +
+        "Rank: " + rank + "\n" +
+        "Email: " + email + "\n" +
+        "Phone: " + phone + "\n\n" +
+        "Message:\n" + message;
+
+    const mailtoLink =
+        "mailto:" + encodeURIComponent(to) +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+    e.preventDefault();
+    window.location.href = mailtoLink;
+});
+</script>
+
+<script>
+// close modal when clicking outside
+document.getElementById('contactModal').onclick = function(e) {
+    if (e.target === this) {
+        this.style.display = 'none';
+    }
+};
+</script>
+
+<script>
+// close button inside modal
+document.addEventListener("DOMContentLoaded", function () {
+    const closeBtn = document.getElementById("closeContact");
+    const modal = document.getElementById("contactModal");
+
+    if (closeBtn && modal) {
+        closeBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            modal.style.display = "none";
+        });
+    }
+});
+</script>
+
+</body>
+</html>
+
