@@ -81,6 +81,58 @@
   text-decoration:none;
 }
 .dropdown-content a:hover{ background:#003366; color:#fff; }
+
+/* ============================================================= */
+/* =========== MOBILE MENU CSS INSERTION START ================= */
+/* ============================================================= */
+
+/* Hamburger icon */
+.mobile-menu-btn {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    font-size: 32px;
+    color: #003366;
+    cursor: pointer;
+    z-index: 100000;
+}
+
+/* Mobile slide-out panel */
+.mobile-panel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: -300px;  /* hidden by default */
+    width: 300px;
+    background: #f4f4f4;
+    box-shadow: -3px 0 12px rgba(0,0,0,0.3);
+    transition: right 0.3s ease;
+    padding-top: 80px;
+    padding-bottom: 40px;
+    overflow-y: auto;
+    z-index: 150000;
+}
+
+.mobile-panel a {
+    display: block;
+    padding: 18px;
+    color: black;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+}
+
+/* Show hamburger on mobile */
+@media(max-width: 992px) {
+    .mobile-menu-btn { 
+        display: block !important; 
+    }
+}
+
+/* ============================================================= */
+/* =========== MOBILE MENU CSS INSERTION END =================== */
+/* ============================================================= */
+
 </style>
 <!-- NAVBAR CSS END -->
 
@@ -88,18 +140,49 @@
 
 <body class="flex items-center justify-center min-h-screen">
 
-<!-- NAVBAR START -->
+<!-- ============================================================= -->
+<!-- =========== MOBILE MENU INSERTION START ===================== -->
+<!-- ============================================================= -->
+<div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+
+<div class="mobile-panel" id="mobilePanel">
+    <a href="demo_login.html">Login</a>
+    <a href="demo_index.html">Home</a>
+
+    <a>About ▼</a>
+    <a href="demo_about.html" style="padding-left:40px;">About</a>
+    <a href="demo_gallery.html" style="padding-left:40px;">Gallery</a>
+
+    <a>Document ▼</a>
+    <a href="demo_policy.html" style="padding-left:40px;">Company Policy</a>
+    <a href="demo_policy1.html" style="padding-left:40px;">Policy Detail</a>
+
+    <a>Courses ▼</a>
+    <a href="demo_course_d.html" style="padding-left:40px;">Courses List</a>
+    <a href="demo_course_r.html" style="padding-left:40px;">Course Register</a>
+
+    <a href="demo_jd_cheng.html">Job Responsibilities</a>
+    <a href="demo_faq.html">FAQ</a>
+
+    <a href="index.html" class="logout">Logout</a>
+</div>
+<!-- ============================================================= -->
+<!-- =========== MOBILE MENU INSERTION END ======================= -->
+<!-- ============================================================= -->
+
+
+<!-- NAVBAR START (desktop) -->
 <div id="nav-master">
   <div class="nav-area">
     <a href="#">Login</a>
-        <a href="demo_index.html">Home</a>
+    <a href="demo_index.html">Home</a>
         
-        <div class="dropdown">
-            <a href="#">About ▼</a>
-            <div class="dropdown-content">
-                <a href="demo_about.html">About</a>
-                <a href="demo_gallery.html">Gallery</a>
-            </div>
+    <div class="dropdown">
+        <a href="#">About ▼</a>
+        <div class="dropdown-content">
+            <a href="demo_about.html">About</a>
+            <a href="demo_gallery.html">Gallery</a>
+        </div>
     </div>
 
     <div class="dropdown">
@@ -251,6 +334,20 @@
 })();
 </script>
 <!-- NAVBAR JS END -->
+
+
+<!-- ============================================================= -->
+<!-- =========== MOBILE MENU JS INSERTION START ================== -->
+<!-- ============================================================= -->
+<script>
+function toggleMenu() {
+    const panel = document.getElementById("mobilePanel");
+    panel.style.right = (panel.style.right === "0px") ? "-300px" : "0px";
+}
+</script>
+<!-- ============================================================= -->
+<!-- =========== MOBILE MENU JS INSERTION END ==================== -->
+<!-- ============================================================= -->
 
 </body>
 </html>

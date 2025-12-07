@@ -92,19 +92,22 @@ body, html {
     z-index: 10000;
 }
 
+/* Full length menu panel on mobile */
 .mobile-panel {
     position: fixed;
     top: 0;
+    bottom: 0;              /* EXTREMELY important */
     right: -300px;
     width: 300px;
-    height: 100%;
+    height: auto !important;
     background: #f4f4f4;
     box-shadow: -3px 0 12px rgba(0,0,0,0.3);
     transition: right 0.3s;
     padding-top: 80px;
+    padding-bottom: 40px;   /* avoid last item touching bottom */
+    overflow-y: auto !important;
     z-index: 15000;
 }
-
 .mobile-panel a {
     display: block;
     padding: 18px;
@@ -125,6 +128,22 @@ body, html {
     display: block;
     pointer-events: none !important;
     z-index: 0;
+}
+
+/* Reduce orange bar on mobile */
+@media (max-width: 992px) {
+    .navbar-bar {
+        top: 0;                  /* Move it to the true top */
+        width: 5%;             /* Full width for mobile */
+        min-width: unset;        /* Remove huge 700px constraint */
+        height: 60px;            /* SHRINK height */
+        padding-right: 20px;     /* Reduce padding */
+    }
+
+    .mobile-menu-btn {
+        top: 14px !important;    /* Reposition hamburger nicely */
+        font-size: 30px;
+    }
 }
 
 /* ---- LOGOUT BUTTON FIX ---- */
@@ -207,7 +226,24 @@ body, html {
     transform: scale(1.18);
 }
 
+/* Force hotspot behind modal */
+.hotspot-gallery {
+    z-index: 10 !important;
+}
 
+/* Ensure modal + blur are always topmost */
+.modal-overlay {
+    z-index: 999999 !important;
+}
+
+.modal-box {
+    z-index: 1000000 !important;
+}
+
+/* Prevent parent stacking context from rising above blur */
+div[style*="position: relative"] {
+    z-index: 0 !important;
+}
 </style>
 
 </head>
